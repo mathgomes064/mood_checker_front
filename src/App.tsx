@@ -1,11 +1,10 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { Routes } from 'react-router-dom'
 
-function App() {
+function App () {
   return (
-    <div>
+    <Routes>
       <h1>Hello world!</h1>
-    </div>
+    </Routes>
   )
 }
 
