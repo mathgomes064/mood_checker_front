@@ -9,7 +9,7 @@ function Brand () {
         fontSize="2xl"
         fontWeight="bold"
       >
-        <RouterLink to="/home">Mood tracker</RouterLink>
+        <RouterLink to="/home">Mood checker</RouterLink>
       </Text>
     </Box>
   )
