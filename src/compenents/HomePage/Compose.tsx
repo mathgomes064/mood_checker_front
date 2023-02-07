@@ -15,7 +15,9 @@ function Compose () {
         flexDirection="column"
         flexGrow="1"
       >
-        <Textarea />
+        <Textarea
+          placeholder="How are you feeling today?"
+        />
 
         <Button
           colorScheme="green"
