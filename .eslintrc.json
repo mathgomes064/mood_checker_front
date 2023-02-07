@@ -12,7 +12,7 @@
     "parserOptions": {
         "ecmaVersion": "latest",
         "sourceType": "module",
-        "project": ["./tsconfig.json"]
+        "project": ["./mood_checker_front/tsconfig.json"]
     },
     "plugins": [
         "react"
