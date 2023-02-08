@@ -73,7 +73,7 @@ function LogIn () {
             </Stack>
           </TabPanel>
           <TabPanel as="form">
-            <Stack>
+            <Stack my={4} spacing={3} fontSize={14}>
             {inputFields.map((input) => (
                 <FormControl key={input.name} isRequired>
                 <FormLabel>{input.label}</FormLabel>
@@ -81,7 +81,7 @@ function LogIn () {
               </FormControl>
             ))}
             </Stack>
-            <Button mt={4} type="submit" w="100%">
+            <Button type="submit" w="100%">
               Enter
             </Button>
             <Stack align='center' pt={3}>
