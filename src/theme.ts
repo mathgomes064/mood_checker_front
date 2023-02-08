@@ -5,6 +5,25 @@ const theme = extendTheme({
     body: 'Labo',
     heading: 'Montserrat',
     mono: 'Menlo, monospace'
+  },
+  styles: {
+    global: {
+      '*': {
+        boxSizing: 'border-box'
+      },
+      html: {
+        height: '100%',
+        width: '100%'
+      },
+      body: {
+        height: '100%',
+        width: '100%'
+      },
+      '#root': {
+        height: '100%',
+        width: '100%'
+      }
+    }
   }
 })
 
