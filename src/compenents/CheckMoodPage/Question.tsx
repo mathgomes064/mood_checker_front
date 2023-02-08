@@ -1,11 +1,5 @@
 import { Flex, Box, Textarea, Avatar, Tooltip } from '@chakra-ui/react'
 
-interface QuestionProps {
-  question: string
-  message: string
-  answer: number
-}
-
 const emoticons = [
   { name: 'Excellent', emoticon: ':D', color: 'green', value: 1 },
   { name: 'Good', emoticon: ':)', color: 'blue', value: 2 },
@@ -14,7 +8,12 @@ const emoticons = [
   { name: 'Bad', emoticon: ':(', color: 'red', value: 5 }
 ]
 
-function EmoticonGroup () {
+interface EmoticonGroupProps {
+  answer: number
+  setAnswer: any
+}
+
+function EmoticonGroup ({ answer, setAnswer }: EmoticonGroupProps) {
   return (
     <Flex
       justifyContent="space-between"
@@ -26,7 +25,8 @@ function EmoticonGroup () {
             label={e.name}
           >
             <Avatar
-              bg={e.color}
+              bg={ answer === e.value ? e.color : `${e.color}.200` }
+              onClick={() => setAnswer(e.value)}
               icon={
                 <Box
                   as="span"
@@ -43,7 +43,16 @@ function EmoticonGroup () {
   )
 }
 
-function Question ({ question, message, answer }: QuestionProps) {
+interface QuestionProps {
+  questionName: string
+  question: string
+  feedback: string
+  answer: number
+  setAnswer: any
+  handleOnChange: any
+}
+
+function Question ({ questionName, question, feedback, answer, setAnswer, handleOnChange }: QuestionProps) {
   return (
     <Flex
       flexDirection="column"
@@ -60,11 +69,16 @@ function Question ({ question, message, answer }: QuestionProps) {
       </Box>
 
       <Textarea
-        placeholder="Share some feedback, it would be anonymous"
-        value={message}
+        placeholder="Share some feedback, it would be anonymous (optional)"
+        name={questionName}
+        value={feedback}
+        onChange={handleOnChange}
       />
 
-      <EmoticonGroup />
+      <EmoticonGroup
+        answer={answer}
+        setAnswer={setAnswer}
+      />
     </Flex>
   )
 }
