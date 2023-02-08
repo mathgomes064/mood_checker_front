@@ -12,6 +12,7 @@ import {
   Tabs,
   Text
 } from '@chakra-ui/react'
+import { Link } from 'react-router-dom'
 
 function SignUp () {
   interface InputProps {
@@ -39,24 +40,12 @@ function SignUp () {
       placeholder: 'Confirm password',
       label: 'Confirm password',
       type: 'password'
-    },
-    {
-      name: 'team-name',
-      placeholder: 'Enter team name',
-      label: 'Team name',
-      type: 'text'
-    },
-    {
-      name: 'team-code',
-      placeholder: 'Enter team code',
-      label: 'Team code',
-      type: 'password'
     }
   ]
 
   return (
     <Stack align='center' justify='center' h='100%'>
-      <Heading pt={4} pb={2} size='xl'>Mood Checker</Heading>
+      <Link to='/'><Heading pt={4} pb={2} size='xl'>Mood Checker</Heading></Link>
       <Tabs isFitted variant='enclosed-colored' p={4} rounded='md' w={280} boxShadow='0px 2px 20px #00000012;'>
         <TabList>
           <Tab>Regular</Tab>
@@ -68,14 +57,10 @@ function SignUp () {
           <Text textAlign='center'>Sign Up as a regular employee to access your team`s thought feed and check in with your mood!</Text>
           <Stack my={4} spacing={3} fontSize={14}>
             {inputFields.map((input) => (
-              input.name !== 'team-name'
-                ? (
                 <FormControl isRequired key={input.name}>
                   <FormLabel>{input.label}</FormLabel>
                   <Input name={input.name} placeholder={input.placeholder} type={input.type} size='sm'/>
                </FormControl>
-                  )
-                : null
             ))}
            </Stack>
            <Button type='submit' w='100%'>Sign Up</Button>
