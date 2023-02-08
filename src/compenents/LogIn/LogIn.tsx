@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react'
 function LogIn () {
   return (
-    <Stack pt={4} align="center">
+    <Stack align='center' justify='center' h='100%'>
       <Heading pt={4} pb={2} size="xl">
         Mood Checker
       </Heading>

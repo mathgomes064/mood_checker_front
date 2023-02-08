@@ -15,7 +15,7 @@ import {
 
 function SignUp () {
   return (
-    <Stack pt={4} align='center'>
+    <Stack align='center' justify='center' h='100%'>
       <Heading pt={4} pb={2} size='xl'>Mood Checker</Heading>
       <Tabs isFitted variant='enclosed-colored' p={4} rounded='md' w={280} boxShadow='0px 2px 20px #00000012;'>
         <TabList>
