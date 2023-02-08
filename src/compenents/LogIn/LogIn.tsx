@@ -13,6 +13,28 @@ import {
   Text
 } from '@chakra-ui/react'
 function LogIn () {
+  interface InputProps {
+    name: string
+    placeholder: string
+    label: string
+    type: string
+  }
+
+  const inputFields: InputProps[] = [
+    {
+      name: 'email',
+      placeholder: 'Enter email address',
+      label: 'Email',
+      type: 'email'
+    },
+    {
+      name: 'password',
+      placeholder: 'Enter password',
+      label: 'Password',
+      type: 'password'
+    }
+  ]
+
   return (
     <Stack align='center' justify='center' h='100%'>
       <Heading pt={4} pb={2} size="xl">
@@ -34,14 +56,12 @@ function LogIn () {
         <TabPanels>
           <TabPanel as="form">
             <Stack my={4} spacing={3} fontSize={14}>
-              <FormControl isRequired>
-                <FormLabel>Email</FormLabel>
-                <Input placeholder="Email address" type="email" size="sm" />
+              {inputFields.map((input) => (
+                <FormControl key={input.name} isRequired>
+                <FormLabel>{input.label}</FormLabel>
+                <Input name={input.name} placeholder={input.placeholder} type={input.type} size="sm" />
               </FormControl>
-              <FormControl isRequired>
-                <FormLabel>Password</FormLabel>
-                <Input placeholder="Password" type="password" size="sm" />
-              </FormControl>
+              ))}
             </Stack>
             <Button type="submit" w="100%">
               Enter
@@ -54,14 +74,12 @@ function LogIn () {
           </TabPanel>
           <TabPanel as="form">
             <Stack>
-              <FormControl isRequired>
-                <FormLabel>Email</FormLabel>
-                <Input placeholder="Email address" type="email" size="sm" />
+            {inputFields.map((input) => (
+                <FormControl key={input.name} isRequired>
+                <FormLabel>{input.label}</FormLabel>
+                <Input name={input.name} placeholder={input.placeholder} type={input.type} size="sm" />
               </FormControl>
-              <FormControl isRequired>
-                <FormLabel>Password</FormLabel>
-                <Input placeholder="Password" type="password" size="sm" />
-              </FormControl>
+            ))}
             </Stack>
             <Button mt={4} type="submit" w="100%">
               Enter
