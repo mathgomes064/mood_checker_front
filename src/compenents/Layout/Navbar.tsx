@@ -1,6 +1,6 @@
 import { CloseIcon } from '@chakra-ui/icons'
 import { Box, Button, Flex, Text } from '@chakra-ui/react'
-import { Link as RouterLink } from 'react-router-dom'
+import { Link as RouterLink, useNavigate } from 'react-router-dom'
 
 function Brand () {
   return (
@@ -35,13 +35,18 @@ function MenuItem ({ children, to = '/', ...rest }: MenuItemProps) {
 }
 
 function Navbar () {
+  const navigate = useNavigate()
+  const handleSignOut = () => {
+    navigate('/')
+  }
   return (
     <Flex
       as="header"
       alignItems="center"
       justifyContent="space-between"
-      padding="3"
-      bg="green.300"
+      py={3}
+      px={6}
+      bg="green.500"
     >
       <Brand />
 
@@ -51,14 +56,11 @@ function Navbar () {
 
       <Button
         variant="ghost"
+        _hover={{ bgColor: 'green.300' }}
+        rightIcon={<CloseIcon ml={2} />}
+        onClick={handleSignOut}
       >
-        <Box
-          display="flex"
-          gap="2"
-        >
-          Sign out
-          <CloseIcon />
-        </Box>
+        Sign out
       </Button>
     </Flex>
   )
