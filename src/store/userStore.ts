@@ -1,13 +1,13 @@
 import { create } from 'zustand'
+import { type User, type UserState } from '../model/user'
 
-interface User {
-  username: string
-  email: string
-  isManager: boolean
-}
-
-const useUserStore = create((set) => ({
-  user: {},
+const useUserStore = create<UserState>((set) => ({
+  user: {
+    id: '',
+    username: '',
+    email: '',
+    isManager: false
+  },
   userToken: '',
   setUser: (user: User) => { set({ user }) },
   setUserToken: (userToken: string) => { set({ userToken }) }
