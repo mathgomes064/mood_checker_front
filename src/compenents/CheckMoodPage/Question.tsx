@@ -64,6 +64,7 @@ function Question ({ questionName, question, feedback, answer, setAnswer, handle
         borderRadius="8px"
         padding="2"
         textAlign="center"
+        bgColor="green.100"
       >
         {question}
       </Box>
@@ -73,6 +74,7 @@ function Question ({ questionName, question, feedback, answer, setAnswer, handle
         name={questionName}
         value={feedback}
         onChange={handleOnChange}
+        _focusVisible={{ borderColor: 'green.500' }}
       />
 
       <EmoticonGroup

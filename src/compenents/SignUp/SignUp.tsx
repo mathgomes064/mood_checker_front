@@ -44,38 +44,70 @@ function SignUp () {
   ]
 
   return (
-    <Stack align='center' justify='center' h='100%'>
-      <Link to='/'><Heading pt={4} pb={2} size='xl'>Mood Checker</Heading></Link>
-      <Tabs isFitted variant='enclosed-colored' p={4} rounded='md' w={280} boxShadow='0px 2px 20px #00000012;'>
+    <Stack align="center" justify="center" h="100%">
+      <Link to="/">
+        <Heading pt={4} pb={2} size="xl">
+          Mood Checker
+        </Heading>
+      </Link>
+      <Tabs
+        isFitted
+        variant="enclosed-colored"
+        p={4}
+        rounded="md"
+        w={280}
+        h={465}
+        boxShadow="0px 2px 20px #00000012;"
+        colorScheme="green"
+      >
         <TabList>
           <Tab>Regular</Tab>
           <Tab>Manager</Tab>
         </TabList>
 
         <TabPanels>
-          <TabPanel as='form'>
-          <Text textAlign='center'>Sign Up as a regular employee to access your team`s thought feed and check in with your mood!</Text>
-          <Stack my={4} spacing={3} fontSize={14}>
-            {inputFields.map((input) => (
+          <TabPanel as="form">
+            <Text textAlign="center">
+              Sign Up as a regular to access your team`s thought feed
+              and check in with your mood!
+            </Text>
+            <Stack my={4} spacing={3} fontSize={14}>
+              {inputFields.map((input) => (
                 <FormControl isRequired key={input.name}>
                   <FormLabel>{input.label}</FormLabel>
-                  <Input name={input.name} placeholder={input.placeholder} type={input.type} size='sm'/>
-               </FormControl>
-            ))}
-           </Stack>
-           <Button type='submit' w='100%'>Sign Up</Button>
+                  <Input
+                    name={input.name}
+                    placeholder={input.placeholder}
+                    type={input.type}
+                    size="sm"
+                  />
+                </FormControl>
+              ))}
+            </Stack>
+            <Button type="submit" w="100%" colorScheme="green">
+              Sign Up
+            </Button>
           </TabPanel>
-          <TabPanel as='form'>
-          <Text textAlign='center'>Sign Up as a Team Manager to check your team`s mood and thoughts!</Text>
-          <Stack>
-          {inputFields.map((input) => (
+          <TabPanel as="form">
+            <Text textAlign="center">
+              Sign Up as a Team Manager to check your team`s mood and thoughts!
+            </Text>
+            <Stack my={4} spacing={3} fontSize={14}>
+              {inputFields.map((input) => (
                 <FormControl isRequired key={input.name}>
                   <FormLabel>{input.label}</FormLabel>
-                  <Input name={input.name} placeholder={input.placeholder} type={input.type} size='sm'/>
-               </FormControl>
-          ))}
-           </Stack>
-           <Button mt={4} type='submit' w='100%'>Sign Up</Button>
+                  <Input
+                    name={input.name}
+                    placeholder={input.placeholder}
+                    type={input.type}
+                    size="sm"
+                  />
+                </FormControl>
+              ))}
+            </Stack>
+            <Button type="submit" w="100%" colorScheme="green">
+              Sign Up
+            </Button>
           </TabPanel>
         </TabPanels>
       </Tabs>
