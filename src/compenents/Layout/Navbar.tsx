@@ -40,8 +40,9 @@ function Navbar () {
       as="header"
       alignItems="center"
       justifyContent="space-between"
-      padding="3"
-      bg="green.300"
+      py={3}
+      px={6}
+      bg="green.500"
     >
       <Brand />
 
@@ -51,14 +52,10 @@ function Navbar () {
 
       <Button
         variant="ghost"
+        _hover={{ bgColor: 'green.300' }}
+        rightIcon={<CloseIcon ml={2} />}
       >
-        <Box
-          display="flex"
-          gap="2"
-        >
-          Sign out
-          <CloseIcon />
-        </Box>
+        Sign out
       </Button>
     </Flex>
   )
