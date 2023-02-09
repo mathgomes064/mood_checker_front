@@ -1,13 +1,6 @@
 import { Avatar, Flex, Box, Textarea, Button } from '@chakra-ui/react'
-import { useNavigate } from 'react-router-dom'
 
 function Compose () {
-  const navigate = useNavigate()
-
-  const handleSignOut = () => {
-    navigate('/')
-  }
-
   return (
     <Flex
       gap="2"
@@ -29,7 +22,6 @@ function Compose () {
 
         <Button
           colorScheme="green"
-          onClick={handleSignOut}
         >
           Send
         </Button>

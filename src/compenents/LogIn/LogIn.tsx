@@ -12,6 +12,8 @@ import {
   Tabs,
   Text
 } from '@chakra-ui/react'
+import { Link, useNavigate } from 'react-router-dom'
+
 function LogIn () {
   interface InputProps {
     name: string
@@ -19,6 +21,8 @@ function LogIn () {
     label: string
     type: string
   }
+
+  const navigate = useNavigate()
 
   const inputFields: InputProps[] = [
     {
@@ -35,17 +39,24 @@ function LogIn () {
     }
   ]
 
+  const handleSignUp = () => {
+    navigate('/signup')
+  }
+
   return (
     <Stack align='center' justify='center' h='100%'>
-      <Heading pt={4} pb={2} size="xl">
-        Mood Checker
-      </Heading>
+      <Link to="/">
+        <Heading pt={4} pb={2} size="xl">
+          Mood Checker
+        </Heading>
+      </Link>
       <Tabs
         isFitted
         variant="enclosed-colored"
         p={4}
         rounded="md"
         w={280}
+        colorScheme="green"
         boxShadow="0px 2px 20px #00000012;"
       >
         <TabList>
@@ -63,13 +74,13 @@ function LogIn () {
               </FormControl>
               ))}
             </Stack>
-            <Button type="submit" w="100%">
+            <Button type="submit" w="100%" colorScheme="green">
               Enter
             </Button>
             <Stack align='center' pt={3}>
                 <Text>Doesn`t have an account yet?
                 </Text>
-                <Button variant='link' color='blue.500'>Sign Up</Button>
+                <Button variant='link' colorScheme="green" onClick={handleSignUp}>Sign Up</Button>
             </Stack>
           </TabPanel>
           <TabPanel as="form">
@@ -81,13 +92,13 @@ function LogIn () {
               </FormControl>
             ))}
             </Stack>
-            <Button type="submit" w="100%">
+            <Button type="submit" w="100%" colorScheme="green">
               Enter
             </Button>
             <Stack align='center' pt={3}>
                 <Text>Doesn`t have an account yet?
                 </Text>
-                <Button variant='link' color='blue.500'>Sign Up</Button>
+                <Button variant='link' colorScheme="green" onClick={handleSignUp}>Sign Up</Button>
             </Stack>
           </TabPanel>
         </TabPanels>
