@@ -1,12 +1,12 @@
 import { Avatar, Flex, Text } from '@chakra-ui/react'
 
-interface ThoughtProps {
-  nickname: string
-  message: string
-  date: Date
+interface PostProps {
+  user: string
+  thought: string
+  createdAt: string
 }
 
-function Thought ({ nickname, message, date }: ThoughtProps) {
+function Post ({ user, thought, createdAt }: PostProps) {
   return (
     <Flex
       flexDirection="column"
@@ -19,7 +19,7 @@ function Thought ({ nickname, message, date }: ThoughtProps) {
         alignItems="center"
       >
         <Avatar />
-        <Text fontWeight="bold">{nickname}</Text>
+        <Text fontWeight="bold">{user}</Text>
       </Flex>
 
       <Flex
@@ -32,16 +32,16 @@ function Thought ({ nickname, message, date }: ThoughtProps) {
           width="100%"
           fontSize="lg"
         >
-          {message}
+          {thought}
         </Text>
         <Text
           fontStyle="italic"
         >
-          {date.toDateString()}
+          {createdAt}
         </Text>
       </Flex>
     </Flex>
   )
 }
 
-export default Thought
+export default Post
