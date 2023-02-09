@@ -17,6 +17,7 @@ function Compose () {
       >
         <Textarea
           placeholder="How are you feeling today?"
+          _focusVisible={{ borderColor: 'green.500' }}
         />
 
         <Button
