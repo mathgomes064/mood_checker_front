@@ -1,58 +1,18 @@
-import { Flex, Box, Textarea, Avatar, Tooltip } from '@chakra-ui/react'
-
-const emoticons = [
-  { name: 'Excellent', emoticon: ':D', color: 'green', value: 1 },
-  { name: 'Good', emoticon: ':)', color: 'blue', value: 2 },
-  { name: 'Neutral', emoticon: ':|', color: 'yellow', value: 3 },
-  { name: 'Hard', emoticon: ':/', color: 'orange', value: 4 },
-  { name: 'Bad', emoticon: ':(', color: 'red', value: 5 }
-]
-
-interface EmoticonGroupProps {
-  answer: number
-  setAnswer: any
-}
-
-function EmoticonGroup ({ answer, setAnswer }: EmoticonGroupProps) {
-  return (
-    <Flex
-      justifyContent="space-between"
-    >
-      {
-        emoticons.map((e, index) => (
-          <Tooltip
-            key={index}
-            label={e.name}
-          >
-            <Avatar
-              bg={ answer === e.value ? e.color : `${e.color}.200` }
-              onClick={() => setAnswer(e.value)}
-              icon={
-                <Box
-                  as="span"
-                  fontWeight="bold"
-                >
-                  {e.emoticon}
-                </Box>
-              }
-            />
-          </Tooltip>
-        ))
-      }
-    </Flex>
-  )
-}
+import { Flex, Box, Textarea } from '@chakra-ui/react'
+import EmoticonGroup from './EmoticonGroup'
 
 interface QuestionProps {
   questionName: string
+  rateName: string
   question: string
   feedback: string
-  answer: number
-  setAnswer: any
+  rate: number
+  formValues: any
   handleOnChange: any
+  updateValues: any
 }
 
-function Question ({ questionName, question, feedback, answer, setAnswer, handleOnChange }: QuestionProps) {
+function Question ({ questionName, rateName, question, feedback, rate, formValues, handleOnChange, updateValues }: QuestionProps) {
   return (
     <Flex
       flexDirection="column"
@@ -78,8 +38,10 @@ function Question ({ questionName, question, feedback, answer, setAnswer, handle
       />
 
       <EmoticonGroup
-        answer={answer}
-        setAnswer={setAnswer}
+        rate={rate}
+        rateName={rateName}
+        formValue={formValues}
+        updateValues={updateValues}
       />
     </Flex>
   )
