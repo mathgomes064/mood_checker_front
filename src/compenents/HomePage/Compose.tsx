@@ -7,12 +7,15 @@ interface ComposeProps {
 }
 
 function Compose ({ postThought }: ComposeProps) {
-  const { formValues, handleOnChange } = useForm({ thought: '' })
+  const { formValues, handleOnChange, reset } = useForm({ thought: '' })
   const user = useUserStore((state) => state.user)
   const { thought } = formValues
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    postThought({ thought, user: user.id })
+    if (thought !== '') {
+      postThought({ thought, user: user.id })
+      reset()
+    }
   }
 
   return (
