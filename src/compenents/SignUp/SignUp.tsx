@@ -12,9 +12,13 @@ import {
   Tabs,
   Text
 } from '@chakra-ui/react'
-import { Link } from 'react-router-dom'
+import { type FormEvent } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import useForm from '../../hook/useForm'
+import { api } from '../../services/axios'
 
 function SignUp () {
+  const navigate = useNavigate()
   interface InputProps {
     name: string
     placeholder: string
@@ -23,6 +27,12 @@ function SignUp () {
   }
 
   const inputFields: InputProps[] = [
+    {
+      name: 'username',
+      placeholder: 'Enter username',
+      label: 'Username',
+      type: 'text'
+    },
     {
       name: 'email',
       placeholder: 'Enter email address',
@@ -34,14 +44,27 @@ function SignUp () {
       placeholder: 'Enter password',
       label: 'Password',
       type: 'password'
-    },
-    {
-      name: 'confirm-password',
-      placeholder: 'Confirm password',
-      label: 'Confirm password',
-      type: 'password'
     }
   ]
+
+  const { formValues, handleOnChange } = useForm({
+    email: '',
+    password: ''
+  })
+
+  const handleSubmit = async (e: FormEvent<HTMLDivElement>) => {
+    e.preventDefault()
+
+    try {
+      await api.post('/api/users/users/', {
+        email: formValues.email,
+        password: formValues.password
+      })
+      navigate('/login')
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
   return (
     <Stack align="center" justify="center" h="100%">
@@ -66,7 +89,7 @@ function SignUp () {
         </TabList>
 
         <TabPanels>
-          <TabPanel as="form">
+          <TabPanel as="form" onSubmit={(e) => { handleSubmit(e) }}>
             <Text textAlign="center">
               Sign Up as a regular to access your team`s thought feed
               and check in with your mood!
@@ -80,6 +103,10 @@ function SignUp () {
                     placeholder={input.placeholder}
                     type={input.type}
                     size="sm"
+                    value={input.name === 'email'
+                      ? formValues.email
+                      : input.name === 'password' ? formValues.password : formValues.confirmPassword}
+                    onChange={handleOnChange}
                   />
                 </FormControl>
               ))}
@@ -95,12 +122,16 @@ function SignUp () {
             <Stack my={4} spacing={3} fontSize={14}>
               {inputFields.map((input) => (
                 <FormControl isRequired key={input.name}>
-                  <FormLabel>{input.label}</FormLabel>
+                  <FormLabel htmlFor={input.name}>{input.label}</FormLabel>
                   <Input
                     name={input.name}
                     placeholder={input.placeholder}
                     type={input.type}
                     size="sm"
+                    value={input.name === 'email'
+                      ? formValues.email
+                      : input.name === 'password' ? formValues.password : formValues.confirmPassword}
+                    onChange={handleOnChange}
                   />
                 </FormControl>
               ))}
