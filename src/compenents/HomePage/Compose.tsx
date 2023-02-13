@@ -1,5 +1,6 @@
 import { Avatar, Flex, Box, Textarea, Button } from '@chakra-ui/react'
 import useForm from '../../hook/useForm'
+import useUserStore from '../../store/userStore'
 
 interface ComposeProps {
   postThought: any
@@ -7,11 +8,11 @@ interface ComposeProps {
 
 function Compose ({ postThought }: ComposeProps) {
   const { formValues, handleOnChange } = useForm({ thought: '' })
+  const user = useUserStore((state) => state.user)
   const { thought } = formValues
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    console.log(formValues)
-    postThought(thought, 'nick')
+    postThought({ thought, user: user.id })
   }
 
   return (
