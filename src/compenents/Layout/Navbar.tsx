@@ -43,6 +43,7 @@ function Navbar () {
   const handleSignOut = () => {
     setUserToken('')
     setUser({ id: '', email: '', username: '', isManager: false })
+    window.localStorage.clear()
     navigate('/')
   }
   return (

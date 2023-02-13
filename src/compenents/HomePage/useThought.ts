@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { useEffect, useState } from 'react'
 import { api } from '../../services/axios'
-import useUserStore from '../../store/userStore'
 
 function useThought () {
   const [thoughts, setThoughts] = useState<Thought[]>([])
-  const userToken = useUserStore((state) => state.userToken)
+
+  const userToken = window.localStorage.getItem('authToken') as string
 
   const postThought = async ({ thought, user }: Thought) => {
     api.defaults.headers.post.Authorization = `Bearer ${userToken}`

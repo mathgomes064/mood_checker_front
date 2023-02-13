@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 import { useEffect, useState } from 'react'
 import { api } from '../../services/axios'
-import useUserStore from '../../store/userStore'
 
 interface Mood {
   rateOne: number
@@ -13,8 +12,8 @@ interface Mood {
 }
 
 function useMood ({ formValues, updateValues }: any) {
-  const userToken = useUserStore((state) => state.userToken)
-  const user = useUserStore((state) => state.user)
+  const userToken = window.localStorage.getItem('authToken') as string
+  const userId = window.localStorage.getItem('userId') as string
   const [mood, setMood] = useState<Mood>({
     rateOne: 3,
     questionOne: '',
@@ -27,14 +26,14 @@ function useMood ({ formValues, updateValues }: any) {
   const saveMood = async (newMood: Mood) => {
     api.defaults.headers.post.Authorization = `Bearer ${userToken}`
 
-    await api.post(`api/moods/${user.id}`, {
+    await api.post(`api/moods/${userId}`, {
       rate_one: newMood.rateOne,
       rate_two: newMood.rateTwo,
       rate_three: newMood.rateThree,
       question_one: newMood.questionOne,
       question_two: newMood.questionTwo,
       question_tree: newMood.questionThree,
-      mood: 'neutral'
+      mood: 'Very sad'
     })
       .then(() => { console.log('Success!') })
   }
@@ -42,11 +41,10 @@ function useMood ({ formValues, updateValues }: any) {
   useEffect(() => {
     async function getMood () {
       api.defaults.headers.get.Authorization = `Bearer ${userToken}`
-      await api.get(`api/users/${user.id}/moods/`)
+      await api.get(`api/users/${userId}/moods/`)
         .then((res) => { setMood(res.data) })
         .catch((error) => { console.log(error) })
     }
-
     getMood()
   }, [])
 
