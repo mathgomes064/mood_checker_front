@@ -7,6 +7,8 @@ import useThought from './useThought'
 function HomePage () {
   const { thoughts, postThought } = useThought()
 
+  console.log('Home page', thoughts)
+
   return (
     <Layout>
       <Container
@@ -18,7 +20,7 @@ function HomePage () {
         />
         <Divider />
         {
-          thoughts.map((t: Thought) => (
+          thoughts.reverse().map((t: Thought) => (
             <Post
               key={t.id}
               user={t.user}
