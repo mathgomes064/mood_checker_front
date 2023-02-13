@@ -1,31 +1,32 @@
 import {
+  Box,
   Button,
   FormControl,
   FormLabel,
   Heading,
   Input,
   Stack,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  Text
+  Text,
+  useToast
 } from '@chakra-ui/react'
 import { type FormEvent } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import useForm from '../../hook/useForm'
 import { api } from '../../services/axios'
+import useUserStore from '../../store/userStore'
 
 function LogIn () {
+  const navigate = useNavigate()
+  const toast = useToast()
+  const setUserToken = useUserStore((state) => state.setUserToken)
+  const setUser = useUserStore((state) => state.setUser)
+  const user = useUserStore((state) => state.user)
   interface InputProps {
     name: string
     placeholder: string
     label: string
     type: string
   }
-
-  const navigate = useNavigate()
 
   const inputFields: InputProps[] = [
     {
@@ -57,10 +58,26 @@ function LogIn () {
       await api.post('/api/users/login/', {
         email: formValues.email,
         password: formValues.password
+      }).then(res => {
+        setUserToken(res.data.access)
+        setUser({ ...user, email: formValues.email })
       })
-      console.log('Success!')
+      navigate('/home')
+      toast({
+        title: 'Success!',
+        description: 'You`ve successfully Logged In!',
+        status: 'success',
+        duration: 3000,
+        isClosable: true
+      })
     } catch (error) {
-      console.log(error)
+      toast({
+        title: 'Error!',
+        description: 'The email or password are wrong!',
+        status: 'error',
+        duration: 3000,
+        isClosable: true
+      })
     }
   }
 
@@ -71,22 +88,13 @@ function LogIn () {
           Mood Checker
         </Heading>
       </Link>
-      <Tabs
-        isFitted
-        variant='enclosed-colored'
+      <Box
         p={4}
         rounded='md'
         w={280}
-        colorScheme='green'
         boxShadow='0px 2px 20px #00000012;'
       >
-        <TabList>
-          <Tab>Regular</Tab>
-          <Tab>Manager</Tab>
-        </TabList>
-
-        <TabPanels>
-          <TabPanel
+        <Stack
             as='form'
             onSubmit={async (e) => {
               handleSubmit(e)
@@ -116,45 +124,8 @@ function LogIn () {
                 Sign Up
               </Button>
             </Stack>
-          </TabPanel>
-          <TabPanel
-            as='form'
-            onSubmit={(e) => {
-              handleSubmit(e)
-            }}
-          >
-            <Stack my={4} spacing={3} fontSize={14}>
-              {inputFields.map((input) => (
-                <FormControl key={input.name} isRequired>
-                  <FormLabel>{input.label}</FormLabel>
-                  <Input
-                    name={input.name}
-                    placeholder={input.placeholder}
-                    type={input.type}
-                    size='sm'
-                    // value={}
-                    onChange={handleOnChange}
-                  />
-                </FormControl>
-              ))}
-            </Stack>
-            <Button type='submit' w='100%' colorScheme='green'>
-              Enter
-            </Button>
-            <Stack align='center' pt={3}>
-              <Text>Doesn`t have an account yet?</Text>
-              <Button
-                variant='link'
-                colorScheme='green'
-                onClick={handleSignUp}
-                // onChange={handleOnChange}
-              >
-                Sign Up
-              </Button>
-            </Stack>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+          </Stack>
+      </Box>
     </Stack>
   )
 }
