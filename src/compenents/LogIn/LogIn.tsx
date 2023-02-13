@@ -59,8 +59,16 @@ function LogIn () {
         email: formValues.email,
         password: formValues.password
       }).then(res => {
+        window.localStorage.clear()
+        window.localStorage.setItem('authToken', res.data.access)
+
         setUserToken(res.data.access)
         setUser({ ...user, email: formValues.email })
+      })
+      await api.get('/api/users/').then(res => {
+        const response = res.data.find((value: any) => value.email === formValues.email)
+        setUser(response)
+        window.localStorage.setItem('userId', response.id)
       })
       navigate('/home')
       toast({
@@ -80,6 +88,8 @@ function LogIn () {
       })
     }
   }
+
+  console.log(user)
 
   return (
     <Stack align='center' justify='center' h='100%'>
