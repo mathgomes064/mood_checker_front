@@ -1,6 +1,7 @@
 import { CloseIcon } from '@chakra-ui/icons'
 import { Box, Button, Flex, Text } from '@chakra-ui/react'
 import { Link as RouterLink, useNavigate } from 'react-router-dom'
+import useUserStore from '../../store/userStore'
 
 function Brand () {
   return (
@@ -36,7 +37,13 @@ function MenuItem ({ children, to = '/', ...rest }: MenuItemProps) {
 
 function Navbar () {
   const navigate = useNavigate()
+  const setUserToken = useUserStore((state) => state.setUserToken)
+  const setUser = useUserStore((state) => state.setUser)
+
   const handleSignOut = () => {
+    setUserToken('')
+    setUser({ id: '', email: '', username: '', isManager: false })
+    window.localStorage.clear()
     navigate('/')
   }
   return (
